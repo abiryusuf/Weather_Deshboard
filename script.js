@@ -55,6 +55,11 @@
     currentLoc = "NewYork"
     getCurrentWeather(currentLoc);
  }
+ function clear() {
+  //clear all the weather
+  $("#forecast").empty();
+}
+
 
  //click event 
  $("#searchBtn").on("click", function(e){
