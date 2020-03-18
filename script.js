@@ -5,8 +5,8 @@
  var currDate;
  var currentLoc;
  function getCurrentWeather(){
-   var city = $(this).attr("data-name");
-   var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=eee2c7e90565ccc72ed33f1160353f32";
+   
+   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=London&appid=eee2c7e90565ccc72ed33f1160353f32";
   
    $.ajax({
     url: queryURL,
@@ -23,7 +23,7 @@
     currCard.append(tRow);
 
     //iCon
-    var iconUrl = "http://openweathermap.org/img/wn/" +response.weather[0].icon + "09d@2x.png"
+    var iconUrl = "https://openweathermap.org/img/wn/" +response.weather[0].icon + "09d@2x.png"
     var imgDiv =$("<div>").attr("class", "col-md-4").append($("<img>").attr("src", iconUrl).attr("class", "card-img"));
     tRow.append(imgDiv);
 
@@ -64,7 +64,7 @@
  //click event 
  $("#searchBtn").on("click", function(e){
    e.preventDefault();
-
+ 
    //input value
    var location = $("#searchInput").val().trim();
 
