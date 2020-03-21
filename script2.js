@@ -72,11 +72,14 @@ function getCurrent() {
     //create container div
     var newRow = $("<div>").attr("class","forecastFiveDay");
     forecast.append(newRow)
+    //console.log(response.list.length);
     //loop through array response to find the forecasts for 15:00
     for (var i = 0; i < response.list.length; i++) {
-      // if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+    console.log(i);
+      //if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
       var newCol = $("<div>").attr("class","fiveDay");
       newRow.append(newCol);
+    
       var newCard = $("<div>").attr("class", "card text-white bg-primary");
       newCol.append(newCard);
       var cardHead = $("<div>").attr("class", "card-header").text(moment(response.list[i].dt, "X").format("dddd, MMMM Do YYYY"));
@@ -85,12 +88,12 @@ function getCurrent() {
       newCard.append(cardImg);
       var bodyDiv = $("<div>").attr("class", "card-body");
       newCard.append(bodyDiv);
-      bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + response.list[i].main.temp));
-      bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity));
-      newCard.append(bodyDiv);
+      //bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + response.list[i].main.temp));
+      // bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity));
+      // newCard.append(bodyDiv);
       // newRow.append(newCard);
-      // forecast.append(newRow)
-      // }
+      forecast.append(newRow)
+      //}
     }
   });
 }
