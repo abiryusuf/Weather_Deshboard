@@ -3,13 +3,30 @@ h1{
 }
 
 .searcharea {
-    background-color: #96abc6;
-    padding: 5px;
-    height: 600px;
-    margin-top: auto;
+    background-color: #ececed;
+    padding: 20px;
+    
 }
 
-#searchbtn{
+#searchBtn{
     padding: 6px 5px 0px 5px;
-
 }
+
+.fiveDay {
+        box-sizing: border-box;
+        width: 20%;
+        margin: 5px;
+        padding: 5px;
+        
+}
+.forecastFiveDay{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0px;
+}
+.card{
+    background-color:  rgb(208, 225, 208);
+}
+
+

@@ -103,8 +103,15 @@ function getFiveDayForecast(city){
         }
     });
 } 
-function localStorage(){
-   
+function localStorage(local){
+   if(saveData === null){
+     saveData =[local];
+   }
+   else if(saveData.indexOf(local)=== - 1){
+     saveData.push(local);
+   }
+   //save the new array in local Stroage
+   localStorage.setItem("weather", JSON.stringify(saveData));
 }
 
 
@@ -130,3 +137,70 @@ $("#searchBtn").on("click", function(e){
  
     }
   });
+
+
+
+  var apiKey = "eee2c7e90565ccc72ed33f1160353f32";
+function getFiveDayForecast(currentLoc) {
+  //https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentLoc + "&appid=" + APIKey;
+  // var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?id=" + city + "&APPID=" + apiKey;
+  var queryURL = "https://api.openweathermap.org/data/2.5/forecast/daily?q=" + currentLoc + "&appid=" + APIKey;
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    console.log(response, "Five day forecast!!")
+    // debugger
+    //create container div
+    var newRow = $("<div>").attr("class", "forecastFiveDay");
+    forecast.append(newRow)
+    //loop through array response to find the forecasts for 15:00
+    for (var i = 0; i < response.list.length; i++) {
+      // if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+      var newCol = $("<div>").attr("class", "fiveDay");
+      newRow.append(newCol);
+
+      var newCard = $("<div>").attr("class", "card text-white bg-primary");
+      newCol.append(newCard);
+
+      var cardHead = $("<div>").attr("class", "card-header").text(moment(response.list[i]).format("dddd, MMMM Do YYYY"));
+      newCard.append(cardHead);
+
+     
+
+      
+
+      var cardImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png");
+      newCard.append(cardImg);
+
+      var bodyDiv = $("<div>").attr("class", "card-body");
+      bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + response.list[i].main.temp + " &#8457;"));
+      bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity + "%"));
+      newRow.append(bodyDiv);
+
+      
+      
+      // newRow.append(newCard);
+      // forecast.append(newRow)
+      // }
+    }
+  });
+}
+// var i;
+//                 for (i = 0; i < response.list.length; i++) {
+//                     if (response.list[i].dt_txt === day1Match) {
+//                         $(“#temperature1”).text(Math.round((response.list[i].main.temp - 273.15) * 9 / 5 + 32) + “F”);
+//                         $(“#humidity1”).text(response.list[i].main.humidity + “%”);
+//                         $(“#weatherPic1").attr({ alt: response.list[i].weather[0].main + ” icon”, src: “https://openweathermap.org/img/wn/” + response.list[i].weather[0].icon + “@2x.png” });
+//                     }
+//                     if (response.list[i].dt_txt === day2Match) {
+//                         $(“#temperature2”).text(Math.round((response.list[i].main.temp - 273.15) * 9 / 5 + 32) + “F”);
+//                         $(“#humidity2”).text(response.list[i].main.humidity + “%”);
+//                         $(“#weatherPic2").attr({ alt: response.list[i].weather[0].main + ” icon”, src: “https://openweathermap.org/img/wn/” + response.list[i].weather[0].icon + “@2x.png” });
+//                     }
+
+//                     var day1Match = moment().add(1, “days”).format(“YYYY-MM-DD”) + ” 00:00:00";
+// var day2Match = moment().add(2, “days”).format(“YYYY-MM-DD”) + ” 00:00:00";
+// var day3Match = moment().add(3, “days”).format(“YYYY-MM-DD”) + ” 00:00:00";
+// var day4Match = moment().add(4, “days”).format(“YYYY-MM-DD”) + ” 00:00:00";
+// var day5Match = moment().add(5, “days”).format(“YYYY-MM-DD”) + ” 00:00:00";
