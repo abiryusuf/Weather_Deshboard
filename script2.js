@@ -17,7 +17,7 @@ function getCurrent() {
     url: queryURL,
     method: "GET"
   }).then(function (response) {
-    console.log(response, "Im here!!!!");
+    //console.log(response, "Im here!!!!");
     //create new div
     var currCard = $("<div>").attr("class", "card");
     forecast.append(currCard);
@@ -75,7 +75,7 @@ function getCurrent() {
     //console.log(response.list.length);
     //loop through array response to find the forecasts for 15:00
     for (var i = 0; i < response.list.length; i++) {
-    console.log(i);
+    //console.log(i);
       //if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
       var newCol = $("<div>").attr("class","fiveDay");
       newRow.append(newCol);
@@ -88,7 +88,11 @@ function getCurrent() {
       newCard.append(cardImg);
       var bodyDiv = $("<div>").attr("class", "card-body");
       newCard.append(bodyDiv);
-      //bodyDiv.append($("<p>").attr("class", "card-text").html("Temp: " + response.list[i].main.temp));
+      bodyDiv.append($("<p>").html("Temp: " + response.main.temp));
+  
+      console.log(response);
+      debugger
+      newCard.append(bodyDiv);
       // bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity));
       // newCard.append(bodyDiv);
       // newRow.append(newCard);
@@ -123,6 +127,6 @@ $("#searchBtn").on("click", function (e) {
     // $("#searchInput").val("");
     getCurrent(currentLoc);
     getFiveDayForecast(location);
-    locationStore(currentLoc);
+    //locationStore(currentLoc);
   }
 });
