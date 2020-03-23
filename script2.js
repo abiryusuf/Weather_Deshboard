@@ -86,11 +86,20 @@ function getCurrent() {
       newCard.append(cardHead);
       var cardImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png");
       newCard.append(cardImg);
+
+  
+    //textDiv.append(cardBody);
+    //currCard.append(textDiv);
+      newRow.append(bodyDiv);
+    //
       var bodyDiv = $("<div>").attr("class", "card-body");
       newCard.append(bodyDiv);
-      bodyDiv.append($("<p>").html("Temp: " + response.main.temp));
+      //bodyDiv.append($("<p>").html("<h1>" + "Temp: " + response.main.temp+"<h1>"));
+      //bodyDiv.append($("<p>").text("Humidity: " + response.list[i].dt.main.humidity));
+      newCard.append(bodyDiv);
+     
   
-      console.log(response);
+      console.log(bodyDiv);
       debugger
       newCard.append(bodyDiv);
       // bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity));
