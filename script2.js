@@ -70,11 +70,17 @@ function getCurrent() {
     console.log(response, "Five day forecast!!")
     // debugger
     //create container div
+
+    // var newRow = document.createElement('div').setAttribute('class', "foreecFiveDay")
+
     var newRow = $("<div>").attr("class","forecastFiveDay");
+
+
+
     forecast.append(newRow)
     //console.log(response.list.length);
     //loop through array response to find the forecasts for 15:00
-    for (var i = 0; i < response.list.length; i++) {
+    for (var i = 0; i < response.list.length-2; i++) {
     //console.log(i);
       //if (response.list[i].dt_txt.indexOf("15:00:00") !== -1) {
       var newCol = $("<div>").attr("class","fiveDay");
@@ -86,21 +92,31 @@ function getCurrent() {
       newCard.append(cardHead);
       var cardImg = $("<img>").attr("class", "card-img-top").attr("src", "https://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png");
       newCard.append(cardImg);
+      
 
-  
+
+
+  //var forecastFiveDayDiv = $(".forecastFiveDay");
+  //debugger
     //textDiv.append(cardBody);
     //currCard.append(textDiv);
-      newRow.append(bodyDiv);
+
     //
-      var bodyDiv = $("<div>").attr("class", "card-body");
+    var bodyDiv = $("<div>").attr("class", "card-body");
       newCard.append(bodyDiv);
-      //bodyDiv.append($("<p>").html("<h1>" + "Temp: " + response.main.temp+"<h1>"));
-      //bodyDiv.append($("<p>").text("Humidity: " + response.list[i].dt.main.humidity));
-      newCard.append(bodyDiv);
+      
+   var pTag = $("<p>").text("Temp: " + response.list[i].temp.day);
+   bodyDiv.append(pTag);
+
+   var pTag1 = $("<p>").text("Humidity: " + response.list[i].humidity);
+   bodyDiv.append(pTag1);
+      // bodyDiv.append($("<p>").html("<h1>" + "Temp: " + response.main.temp+"<h1>"));
+      // bodyDiv.append($("<p>").text("Humidity: " + response.list[i].dt.main.humidity));
+      // newCard.append(bodyDiv);
      
   
-      console.log(bodyDiv);
-      debugger
+    //  console.log(bodyDiv);
+     // debugger
       newCard.append(bodyDiv);
       // bodyDiv.append($("<p>").attr("class", "card-text").text("Humidity: " + response.list[i].main.humidity));
       // newCard.append(bodyDiv);
