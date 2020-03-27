@@ -4,7 +4,7 @@ var locationStore =[];
 var forecast = $("#forecast");
 var currentLoc;
 var APIKey = "166a433c57516f51dfab1f7edaed8413";
-var saveData = [];
+
 // Here we are building the URL we need to query the database
 //from activity 5, week 6
 // var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?" +
@@ -127,25 +127,28 @@ function getCurrent() {
   });
 }
 
-function localStorage(local){
-  if(saveData === null){
-    saveData =[local];
-  }
-  else if(saveData.indexOf(local)=== - 1){
-    saveData.push(local);
-  }
-  //save the new array in local Stroage
-  localStorage.setItem("weather", JSON.stringify(saveData));
-}
+
 
 function clear() {
   //clear all the weather
   $("#forecast").empty();
 }
+var saveCurrentSearch =[];
+function saveButton(){
+  $("#prevSearches").empty();
+  for(var i =0; i<saveCurrentSearch.length; i++){
+    var a =$("<div>").attr("class", "card-header")
+    a.addClass("savelocation");
+    a.attr("data-name", saveCurrentSearch[i] );
+    a.text(saveCurrentSearch[i]);
+    $("#prevSearches").append(a);
+  }
+}
 $("#searchBtn").on("click", function (e) {
   e.preventDefault();
   //input value
   var location = $("#searchInput").val().trim();
+  saveCurrentSearch.push(location);
   if (location !== "") {
     clear();
     currentLoc = location;
@@ -153,5 +156,7 @@ $("#searchBtn").on("click", function (e) {
     getCurrent(currentLoc);
     getFiveDayForecast(location);
     //locationStore(currentLoc);
+    saveButton();
   }
 });
+saveButton();
